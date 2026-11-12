@@ -46,7 +46,6 @@
   .qr { flex: none; margin-left: auto; line-height: 0; }
   .qr img { width: 76px; height: 76px; border-radius: 8px; background: #fff; image-rendering: pixelated; display: block; }
   .links a { display: inline-block; margin-right: 10px; font-size: 14px; font-weight: 600; }
-  .soon { font-size: 13px; color: var(--muted); }
   footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 16px 32px; }
 </style>
 <script>
@@ -121,38 +120,6 @@
         </div>
         <a class="qr" href="https://apps.apple.com/vn/app/redball-2d/id6822674819" aria-label="App Store: Red Ball"><img src="qr/red-ball.png" alt="QR code – Red Ball on the App Store"></a>
       </div>
-      <div class="game">
-        <img src="games/sugar-sugar.png" alt="Sugar Sugar">
-        <div>
-          <h3>Sugar Sugar</h3>
-          <p data-i18n="g_sugar">Draw lines, fill the cups</p>
-          <span class="soon" data-i18n="soon">Coming soon</span>
-        </div>
-      </div>
-      <div class="game">
-        <img src="games/snoring.png" alt="Snoring">
-        <div>
-          <h3>Snoring</h3>
-          <p data-i18n="g_snoring">Tap animals, topple the snorer</p>
-          <span class="soon" data-i18n="soon">Coming soon</span>
-        </div>
-      </div>
-      <div class="game">
-        <img src="games/ragdoll-catapult.png" alt="Ragdoll Catapult">
-        <div>
-          <h3>Ragdoll Catapult</h3>
-          <p data-i18n="g_ragdoll">Fling ragdolls with a see-saw</p>
-          <span class="soon" data-i18n="soon">Coming soon</span>
-        </div>
-      </div>
-      <div class="game">
-        <img src="games/sheep-home.png" alt="The Sheep's Journey Home">
-        <div>
-          <h3>The Sheep's Journey Home</h3>
-          <p data-i18n="g_sheep">Guide Rocky, Billy &amp; Tiny home</p>
-          <span class="soon" data-i18n="soon">Coming soon</span>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -191,17 +158,25 @@
     <h3 data-i18n="priv_web_h">This website</h3>
     <p data-i18n="priv_web_p">This page does not use cookies, trackers or analytics, and does not collect personal data. Your language choice is saved only in your browser.</p>
     <h3 data-i18n="priv_app_h">Our apps</h3>
-    <p data-i18n="priv_app_p">The games have no accounts and do not ask for your name, email or other personal details. Depending on the game, they may use:</p>
+    <p data-i18n="priv_app_p">The games have no accounts and do not ask for your name, email or other personal details. We do not collect your game progress: it stays on your device. Depending on the game, these third-party services are used:</p>
     <ul>
-      <li data-i18n-html="priv_li1"><strong>Google AdMob</strong> – shows ads; may use the device advertising identifier if you allow tracking. Ads are personalized only with your permission and, where required, consent.</li>
-      <li data-i18n-html="priv_li2"><strong>Firebase Analytics, Crashlytics and Remote Config</strong> – anonymous usage events, crash reports and game settings.</li>
-      <li data-i18n-html="priv_li3"><strong>Apple In-App Purchase</strong> – purchases are handled by Apple; we never see your payment details.</li>
+      <li data-i18n-html="priv_li1"><strong>Google AdMob</strong> shows the ads. It may collect device identifiers (such as the advertising identifier, if you allow tracking), IP address, approximate location and ad interaction data to serve and measure ads and prevent fraud.</li>
+      <li data-i18n-html="priv_li2"><strong>Firebase Analytics</strong> records anonymous usage events (for example a level started or finished) and device and app information to help us improve the games.</li>
+      <li data-i18n-html="priv_li3"><strong>Firebase Crashlytics</strong> records crash reports with technical details such as device model, iOS version and the state of the app at the time of the crash, only to fix bugs.</li>
+      <li data-i18n-html="priv_li4"><strong>Firebase Remote Config</strong> downloads game settings, such as how many free replays you get each day.</li>
+      <li data-i18n-html="priv_li5"><strong>Apple In-App Purchase</strong> – purchases are processed by Apple. We never see your payment details.</li>
     </ul>
-    <p data-i18n="priv_app_p2">Each game's own Support &amp; Privacy page lists exactly what that game uses.</p>
+    <p data-i18n="priv_app_p2">Not every game uses every service above.</p>
+    <h3 data-i18n="priv_ads_h">Advertising and your choices</h3>
+    <p data-i18n="priv_ads_p1">On first launch a game may ask, through the system “Allow tracking” dialog, whether ads may be personalized. If you decline, you still see ads, but they are not personalized. You can change this at any time in iOS Settings → Privacy &amp; Security → Tracking.</p>
+    <p data-i18n="priv_ads_p2">Where required by law (for example in the European Economic Area and the United Kingdom), a consent form from Google lets you choose how ad data is used before ads are requested.</p>
+    <p data-i18n-html="priv_ads_p3">You can remove ads in games that offer a one-time Pro or Premium purchase. Learn more in <a href="https://policies.google.com/technologies/partner-sites">Google’s policy on how it uses data from apps that use its services</a>.</p>
     <h3 data-i18n="priv_dev_h">Data stored on your device</h3>
-    <p data-i18n="priv_dev_p">Progress, best scores, purchases and settings are stored on your device and removed when you delete the app.</p>
+    <p data-i18n="priv_dev_p">Progress, unlocked levels, best scores and stars, replay counts, purchases, and sound and language settings are stored on your device. This data stays on your device and is removed when you delete the app or use a game’s “Clear progress” option, where available.</p>
+    <h3 data-i18n="priv_net_h">Internet</h3>
+    <p data-i18n="priv_net_p">The games can be played offline. An internet connection is needed only to show ads, download game settings, and make or restore purchases.</p>
     <h3 data-i18n="priv_kid_h">Children's privacy</h3>
-    <p data-i18n="priv_kid_p">The games are for a general audience and are not directed to children under 13. We do not knowingly collect data from children.</p>
+    <p data-i18n="priv_kid_p">The games are for a general audience and are not directed to children under 13. We do not knowingly collect personal information from children. Ads are served by Google AdMob and limited by the settings above. Parents can remove all ads with a one-time purchase where a game offers one. If you believe a child has given us personal information, email us and we will delete it.</p>
     <h3 data-i18n="priv_chg_h">Changes to this policy</h3>
     <p data-i18n="priv_chg_p">Changes are posted on this page with an updated date.</p>
     <h3 data-i18n="priv_contact_h">Contact</h3>

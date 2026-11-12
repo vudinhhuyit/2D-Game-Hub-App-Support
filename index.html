@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2D Game Hub – Games, Support & Privacy</title>
+<meta name="description" content="2D Game Hub – a collection of small, fun 2D games for iPhone and iPad. Game list, support and privacy policy.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  :root {
+    --bg: #f1f6ff; --card: #ffffff; --text: #1d2733; --muted: #5b6878;
+    --sky: #1d6fd6; --line: #dbe5f3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0e1522; --card: #172233; --text: #e7edf4; --muted: #9aa8b8; --sky: #6db3ff; --line: #26364b; }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  header { position: relative; background: linear-gradient(180deg, #2a7de1, #7fd0ff); color: #fff;
+    padding: 56px 16px 40px; text-align: center; }
+  header img { width: 112px; height: 112px; border-radius: 25px; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+  header h1 { margin: 16px 0 4px; font-size: 32px; text-shadow: 0 2px 0 rgba(0,0,0,.2); }
+  header p { margin: 0; opacity: .95; }
+  .lang-switch { position: absolute; top: 16px; right: 16px; }
+  .lang-switch select { appearance: none; -webkit-appearance: none; border: 0; border-radius: 999px; cursor: pointer;
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231d5fb0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+    color: #1d5fb0; font: 600 14px/1 inherit; font-family: inherit; padding: 10px 36px 10px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+  .lang-switch select:focus-visible { outline: 3px solid rgba(255,255,255,.8); outline-offset: 2px; }
+  nav { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  nav a { color: #fff; text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 999px; background: rgba(0,0,0,.2); }
+  main { max-width: 860px; margin: 0 auto; padding: 8px 16px 48px; }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin-top: 24px; scroll-margin-top: 16px; }
+  h2 { margin-top: 0; font-size: 24px; }
+  h3 { margin-bottom: 4px; font-size: 18px; }
+  a { color: var(--sky); }
+  .muted { color: var(--muted); font-size: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 16px; }
+  .game { display: flex; gap: 14px; align-items: center; padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); }
+  .game img { width: 72px; height: 72px; border-radius: 16px; flex: none; box-shadow: 0 2px 8px rgba(0,0,0,.18); }
+  .game h3 { margin: 0; font-size: 17px; }
+  .game p { margin: 2px 0 6px; font-size: 14px; color: var(--muted); line-height: 1.35; }
+  .qr { flex: none; margin-left: auto; line-height: 0; }
+  .qr img { width: 76px; height: 76px; border-radius: 8px; background: #fff; image-rendering: pixelated; display: block; }
+  .links a { display: inline-block; margin-right: 10px; font-size: 14px; font-weight: 600; }
+  .soon { font-size: 13px; color: var(--muted); }
+  footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 16px 32px; }
+</style>
+<script>
+  // Pick the language before first paint: ?lang= > saved choice > browser language.
+  (function () {
+    var supported = ["en", "vi", "zh", "ja", "ko", "es", "pt", "ru"];
+    var lang = new URLSearchParams(location.search).get("lang");
+    if (supported.indexOf(lang) < 0) { try { lang = localStorage.getItem("lang"); } catch (e) { lang = null; } }
+    if (supported.indexOf(lang) < 0) {
+      var n = (navigator.language || "en").toLowerCase().slice(0, 2);
+      lang = supported.indexOf(n) >= 0 ? n : "en";
+    }
+    document.documentElement.lang = lang;
+  })();
+</script>
+</head>
+<body>
+<header>
+  <div class="lang-switch">
+    <select id="lang-select" aria-label="Language">
+      <option value="en">English</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="zh">简体中文</option>
+      <option value="ja">日本語</option>
+      <option value="ko">한국어</option>
+      <option value="es">Español</option>
+      <option value="pt">Português</option>
+      <option value="ru">Русский</option>
+    </select>
+  </div>
+  <img src="icon.png" alt="2D Game Hub">
+  <h1>2D Game Hub</h1>
+  <p data-i18n="tagline">Small 2D games, big fun</p>
+  <nav>
+    <a href="#games" data-i18n="nav_games">Games</a>
+    <a href="#about" data-i18n="nav_about">About</a>
+    <a href="#support" data-i18n="nav_support">Support</a>
+    <a href="#privacy" data-i18n="nav_privacy">Privacy Policy</a>
+  </nav>
+</header>
+
+<main>
+  <section id="games">
+    <h2 data-i18n="games_h">Our Games</h2>
+    <div class="grid">
+      <div class="game">
+        <img src="games/comic-book-boy.png" alt="Comic Book Boy">
+        <div>
+          <h3>Comic Book Boy</h3>
+          <p data-i18n="g_comic">Collect comics, become a hero</p>
+          <div class="links">
+            <a href="https://apps.apple.com/app/id6830351614">App Store</a>
+          </div>
+        </div>
+        <a class="qr" href="https://apps.apple.com/app/id6830351614" aria-label="App Store: Comic Book Boy"><img src="qr/comic-book-boy.png" alt="QR code – Comic Book Boy on the App Store"></a>
+      </div>
+      <div class="game">
+        <img src="games/capy.png" alt="Capybara Around the World">
+        <div>
+          <h3>Capybara Around the World</h3>
+          <p data-i18n="g_capy">Feed the capybara, pop the ice</p>
+          <div class="links"><a href="https://apps.apple.com/app/id6829455439">App Store</a></div>
+        </div>
+        <a class="qr" href="https://apps.apple.com/app/id6829455439" aria-label="App Store: Capybara Around the World"><img src="qr/capy.png" alt="QR code – Capybara Around the World on the App Store"></a>
+      </div>
+      <div class="game">
+        <img src="games/red-ball.png" alt="Red Ball">
+        <div>
+          <h3>Red Ball</h3>
+          <p data-i18n="g_red">Roll, jump and dodge the spikes</p>
+          <div class="links"><a href="https://apps.apple.com/vn/app/redball-2d/id6822674819">App Store</a></div>
+        </div>
+        <a class="qr" href="https://apps.apple.com/vn/app/redball-2d/id6822674819" aria-label="App Store: Red Ball"><img src="qr/red-ball.png" alt="QR code – Red Ball on the App Store"></a>
+      </div>
+      <div class="game">
+        <img src="games/sugar-sugar.png" alt="Sugar Sugar">
+        <div>
+          <h3>Sugar Sugar</h3>
+          <p data-i18n="g_sugar">Draw lines, fill the cups</p>
+          <span class="soon" data-i18n="soon">Coming soon</span>
+        </div>
+      </div>
+      <div class="game">
+        <img src="games/snoring.png" alt="Snoring">
+        <div>
+          <h3>Snoring</h3>
+          <p data-i18n="g_snoring">Tap animals, topple the snorer</p>
+          <span class="soon" data-i18n="soon">Coming soon</span>
+        </div>
+      </div>
+      <div class="game">
+        <img src="games/ragdoll-catapult.png" alt="Ragdoll Catapult">
+        <div>
+          <h3>Ragdoll Catapult</h3>
+          <p data-i18n="g_ragdoll">Fling ragdolls with a see-saw</p>
+          <span class="soon" data-i18n="soon">Coming soon</span>
+        </div>
+      </div>
+      <div class="game">
+        <img src="games/sheep-home.png" alt="The Sheep's Journey Home">
+        <div>
+          <h3>The Sheep's Journey Home</h3>
+          <p data-i18n="g_sheep">Guide Rocky, Billy &amp; Tiny home</p>
+          <span class="soon" data-i18n="soon">Coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 data-i18n="about_h">About</h2>
+    <p data-i18n-html="about_p1"><strong>2D Game Hub</strong> is the home of a growing collection of small, hand-made 2D games for iPhone and iPad: platformers, puzzles, physics toys and more.</p>
+    <h3 data-i18n="about_h3">What you get</h3>
+    <ul>
+      <li data-i18n="about_li1">Quick, easy-to-learn games you can play in short sessions</li>
+      <li data-i18n="about_li2">Colorful pixel and hand-drawn art</li>
+      <li data-i18n="about_li3">No account needed; the games work offline</li>
+      <li data-i18n="about_li4">Free to play, with optional one-time upgrades in some games</li>
+    </ul>
+    <p data-i18n="about_p2">New games are added over time. Check back soon!</p>
+  </section>
+
+  <section id="support">
+    <h2 data-i18n="support_h">Support</h2>
+    <p data-i18n-html="support_p">Need help with a game? Email <a href="mailto:vudinhhuyit@gmail.com?subject=2D%20Game%20Hub%20Support">vudinhhuyit@gmail.com</a> and include:</p>
+    <ul>
+      <li data-i18n="support_li1">The name of the game and its version</li>
+      <li data-i18n="support_li2">Your device model and iOS / iPadOS version</li>
+      <li data-i18n="support_li3">A short description of the problem (a screenshot helps)</li>
+    </ul>
+    <h3 data-i18n="sup_h1">How is my progress saved?</h3>
+    <p data-i18n="sup_p1">Progress is stored only on your device. Deleting a game also deletes its unlocked levels and best scores.</p>
+    <h3 data-i18n="sup_h2">How do I turn off sound?</h3>
+    <p data-i18n="sup_p2">Open the settings or pause menu inside the game and switch sound off.</p>
+    <h3 data-i18n="sup_h3">I bought an upgrade but it's missing</h3>
+    <p data-i18n="sup_p3">Use the "Restore Purchases" button in the game. Purchases are handled by Apple and tied to your Apple ID.</p>
+  </section>
+
+  <section id="privacy">
+    <h2 data-i18n="priv_h">Privacy Policy</h2>
+    <p class="muted" data-i18n="priv_updated">Last updated: November 12, 2026</p>
+    <h3 data-i18n="priv_web_h">This website</h3>
+    <p data-i18n="priv_web_p">This page does not use cookies, trackers or analytics, and does not collect personal data. Your language choice is saved only in your browser.</p>
+    <h3 data-i18n="priv_app_h">Our apps</h3>
+    <p data-i18n="priv_app_p">The games have no accounts and do not ask for your name, email or other personal details. Depending on the game, they may use:</p>
+    <ul>
+      <li data-i18n-html="priv_li1"><strong>Google AdMob</strong> – shows ads; may use the device advertising identifier if you allow tracking. Ads are personalized only with your permission and, where required, consent.</li>
+      <li data-i18n-html="priv_li2"><strong>Firebase Analytics, Crashlytics and Remote Config</strong> – anonymous usage events, crash reports and game settings.</li>
+      <li data-i18n-html="priv_li3"><strong>Apple In-App Purchase</strong> – purchases are handled by Apple; we never see your payment details.</li>
+    </ul>
+    <p data-i18n="priv_app_p2">Each game's own Support &amp; Privacy page lists exactly what that game uses.</p>
+    <h3 data-i18n="priv_dev_h">Data stored on your device</h3>
+    <p data-i18n="priv_dev_p">Progress, best scores, purchases and settings are stored on your device and removed when you delete the app.</p>
+    <h3 data-i18n="priv_kid_h">Children's privacy</h3>
+    <p data-i18n="priv_kid_p">The games are for a general audience and are not directed to children under 13. We do not knowingly collect data from children.</p>
+    <h3 data-i18n="priv_chg_h">Changes to this policy</h3>
+    <p data-i18n="priv_chg_p">Changes are posted on this page with an updated date.</p>
+    <h3 data-i18n="priv_contact_h">Contact</h3>
+    <p><a href="mailto:vudinhhuyit@gmail.com?subject=2D%20Game%20Hub%20Privacy">vudinhhuyit@gmail.com</a></p>
+  </section>
+</main>
+
+<footer>© 2026 2D Game Hub</footer>
+
+<script src="i18n.js"></script>
+</body>
+</html>

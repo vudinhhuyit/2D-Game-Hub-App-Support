@@ -5,48 +5,185 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>2D Game Hub – Games, Support & Privacy</title>
 <meta name="description" content="2D Game Hub – a collection of small, fun 2D games for iPhone and iPad. Game list, support and privacy policy.">
+<meta property="og:title" content="2D Game Hub – Games, Support & Privacy">
+<meta property="og:description" content="A collection of small, fun 2D games for iPhone and iPad.">
+<meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f1f6ff; --card: #ffffff; --text: #1d2733; --muted: #5b6878;
-    --sky: #1d6fd6; --line: #dbe5f3;
+    color-scheme: dark;
+    --bg: #141117;
+    --bg-soft: #1d1922;
+    --card: #221d27;
+    --ink: #f3eef6;
+    --muted: #a59cad;
+    --line: #332c3a;
+    --accent: #fcf1ff;
+    --accent-2: #f6eeff;
+    --accent-strong: #fcf1ff;
+    --accent-ink: #2b1236;
+    --accent-soft: #33243b;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+    --radius: 20px;
   }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #0e1522; --card: #172233; --text: #e7edf4; --muted: #9aa8b8; --sky: #6db3ff; --line: #26364b; }
-  }
+
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--bg); color: var(--text);
-    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-  header { position: relative; background: linear-gradient(180deg, #2a7de1, #7fd0ff); color: #fff;
-    padding: 56px 16px 40px; text-align: center; }
-  header img { width: 112px; height: 112px; border-radius: 25px; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
-  header h1 { margin: 16px 0 4px; font-size: 32px; text-shadow: 0 2px 0 rgba(0,0,0,.2); }
-  header p { margin: 0; opacity: .95; }
-  .lang-switch { position: absolute; top: 16px; right: 16px; }
-  .lang-switch select { appearance: none; -webkit-appearance: none; border: 0; border-radius: 999px; cursor: pointer;
-    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231d5fb0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center;
-    color: #1d5fb0; font: 600 14px/1 inherit; font-family: inherit; padding: 10px 36px 10px 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.15); }
-  .lang-switch select:focus-visible { outline: 3px solid rgba(255,255,255,.8); outline-offset: 2px; }
-  nav { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
-  nav a { color: #fff; text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 999px; background: rgba(0,0,0,.2); }
-  main { max-width: 860px; margin: 0 auto; padding: 8px 16px 48px; }
-  section { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin-top: 24px; scroll-margin-top: 16px; }
-  h2 { margin-top: 0; font-size: 24px; }
-  h3 { margin-bottom: 4px; font-size: 18px; }
-  a { color: var(--sky); }
+  body {
+    margin: 0;
+    font-family: "Be Vietnam Pro", system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-strong); }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s;
+  }
+  .nav.scrolled { border-bottom-color: var(--line); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; color: var(--ink); white-space: nowrap; }
+  .brand img { width: 32px; height: 32px; border-radius: 9px; }
+  .nav-links { display: flex; gap: 4px; align-items: center; }
+  .nav-links a {
+    text-decoration: none; font-size: 15px; font-weight: 500; color: var(--muted);
+    padding: 8px 12px; border-radius: 999px; transition: color .15s, background .15s; white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--ink); background: var(--bg-soft); }
+  .lang-switch { margin-left: 6px; }
+  .lang-switch select {
+    appearance: none; -webkit-appearance: none; cursor: pointer;
+    border: 1px solid var(--line); border-radius: 999px; background-color: var(--card); color: var(--ink);
+    font: 600 13px/1 inherit; font-family: inherit; padding: 8px 30px 8px 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23a59cad' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center;
+  }
+  .lang-switch select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* Hero */
+  .hero { padding: 72px 0 40px; }
+  .hero-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: center; }
+  .hello {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-soft); color: var(--accent-strong);
+    font-weight: 600; font-size: 14px; padding: 6px 14px; border-radius: 999px;
+  }
+  h1 {
+    font-size: clamp(36px, 6vw, 58px); line-height: 1.1; letter-spacing: -0.02em;
+    margin: 18px 0 16px; font-weight: 800;
+  }
+  .lead { font-size: 18px; color: var(--muted); max-width: 34em; margin: 0 0 28px; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+    font-weight: 600; font-size: 15px; padding: 12px 20px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+    transition: transform .15s, box-shadow .15s, background .15s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+
+  .portrait { position: relative; justify-self: center; width: min(340px, 80vw); aspect-ratio: 1; }
+  .portrait .blob {
+    position: absolute; inset: 6%;
+    background: linear-gradient(140deg, var(--accent) 0%, var(--accent-2) 100%);
+    border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%;
+    animation: morph 12s ease-in-out infinite;
+  }
+  @keyframes morph {
+    0%, 100% { border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%; }
+    50% { border-radius: 58% 42% 45% 55% / 42% 58% 42% 58%; }
+  }
+  .portrait .avatar {
+    position: absolute; inset: 15%; border-radius: 28%; overflow: hidden;
+    border: 6px solid var(--card); box-shadow: var(--shadow); background: var(--card);
+  }
+  .portrait .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .float-icon {
+    position: absolute; left: var(--x); top: var(--y); margin: -26px 0 0 -26px;
+    width: 52px; height: 52px; border-radius: 13px; overflow: hidden;
+    box-shadow: var(--shadow); border: 3px solid var(--card); background: var(--card);
+    animation: bob 5s ease-in-out infinite;
+  }
+  .float-icon img { width: 100%; height: 100%; object-fit: cover; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  /* Sections */
+  section { padding: 40px 0; scroll-margin-top: 64px; }
+  h2 { font-size: clamp(26px, 4vw, 34px); line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 16px; font-weight: 800; }
+  h3 { margin: 24px 0 4px; font-size: 18px; }
+  p { margin: 0 0 12px; }
+  ul { margin: 0 0 12px; padding-left: 22px; }
+  li { margin-bottom: 4px; }
+  .panel {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px;
+  }
+  .panel > h2 + p, .panel > h2 + .muted { margin-top: -4px; }
   .muted { color: var(--muted); font-size: 14px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 16px; }
-  .game { display: flex; gap: 14px; align-items: center; padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); }
-  .game img { width: 72px; height: 72px; border-radius: 16px; flex: none; box-shadow: 0 2px 8px rgba(0,0,0,.18); }
-  .game h3 { margin: 0; font-size: 17px; }
-  .game p { margin: 2px 0 6px; font-size: 14px; color: var(--muted); line-height: 1.35; }
-  .qr { flex: none; margin-left: auto; line-height: 0; }
+  .panel p, .panel li { color: color-mix(in srgb, var(--ink) 88%, var(--muted)); }
+  .panel .muted { color: var(--muted); }
+
+  /* Games */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .game {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px; display: flex; flex-direction: column; gap: 14px;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+  }
+  .game:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--accent-strong) 35%, var(--line)); }
+  .g-head { display: flex; gap: 16px; align-items: center; }
+  .g-head img { width: 64px; height: 64px; border-radius: 15px; flex: none; box-shadow: 0 4px 12px rgba(0, 0, 0, .25); object-fit: cover; background: var(--bg-soft); }
+  .g-head h3 { margin: 0; font-size: 18px; line-height: 1.3; }
+  .game p { margin: 0; color: var(--muted); font-size: 15px; }
+  .game-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; }
+  .go {
+    font-size: 14px; font-weight: 600; text-decoration: none; padding: 8px 14px; border-radius: 999px;
+    background: var(--ink); color: var(--bg); border: 1px solid var(--ink); transition: background .15s, color .15s;
+  }
+  .go:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .qr { flex: none; line-height: 0; }
   .qr img { width: 76px; height: 76px; border-radius: 8px; background: #fff; image-rendering: pixelated; display: block; }
-  .links a { display: inline-block; margin-right: 10px; font-size: 14px; font-weight: 600; }
-  footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 16px 32px; }
+
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; text-align: center; }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  @media (max-width: 860px) {
+    .hero { padding: 40px 0 24px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    .portrait { order: -1; width: min(260px, 70vw); }
+    .float-icon { width: 42px; height: 42px; margin: -21px 0 0 -21px; border-radius: 11px; border-width: 2px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 16px; }
+    .brand span { display: none; }
+    .nav-links a { padding: 8px 8px; font-size: 14px; }
+    .panel { padding: 22px 18px; }
+    section { padding: 28px 0; }
+  }
 </style>
 <script>
   // Pick the language before first paint: ?lang= > saved choice > browser language.
@@ -63,126 +200,229 @@
 </script>
 </head>
 <body>
-<header>
-  <div class="lang-switch">
-    <select id="lang-select" aria-label="Language">
-      <option value="en">English</option>
-      <option value="vi">Tiếng Việt</option>
-      <option value="zh">简体中文</option>
-      <option value="ja">日本語</option>
-      <option value="ko">한국어</option>
-      <option value="es">Español</option>
-      <option value="pt">Português</option>
-      <option value="ru">Русский</option>
-    </select>
+
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="icon.png" alt="">
+      <span>2D Game Hub</span>
+    </a>
+    <div class="nav-links">
+      <a href="#games" data-i18n="nav_games">Games</a>
+      <a href="#about" data-i18n="nav_about">About</a>
+      <a href="#support" data-i18n="nav_support">Support</a>
+      <a href="#privacy" data-i18n="nav_privacy">Privacy Policy</a>
+      <div class="lang-switch">
+        <select id="lang-select" aria-label="Language">
+          <option value="en">English</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="zh">简体中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="es">Español</option>
+          <option value="pt">Português</option>
+          <option value="ru">Русский</option>
+        </select>
+      </div>
+    </div>
   </div>
-  <img src="icon.png" alt="2D Game Hub">
-  <h1>2D Game Hub</h1>
-  <p data-i18n="tagline">Small 2D games, big fun</p>
-  <nav>
-    <a href="#games" data-i18n="nav_games">Games</a>
-    <a href="#about" data-i18n="nav_about">About</a>
-    <a href="#support" data-i18n="nav_support">Support</a>
-    <a href="#privacy" data-i18n="nav_privacy">Privacy Policy</a>
-  </nav>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>2D Game Hub</h1>
+      <p class="lead" data-i18n="tagline">Small 2D games, big fun</p>
+      <div class="ctas">
+        <a class="btn primary" href="#games">
+          <span data-i18n="nav_games">Games</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn" href="#support" data-i18n="nav_support">Support</a>
+      </div>
+    </div>
+
+    <div class="portrait" aria-hidden="true">
+      <div class="blob"></div>
+      <div class="avatar"><img src="icon.png" alt=""></div>
+      <div class="float-icon" style="--x:68.4%;--y:5.7%;animation-delay:-0.0s"><img src="games/red-ball.png" alt=""></div>
+      <div class="float-icon" style="--x:94.3%;--y:31.6%;animation-delay:-0.7s"><img src="games/rollventure-2.png" alt=""></div>
+      <div class="float-icon" style="--x:94.3%;--y:68.4%;animation-delay:-1.4s"><img src="games/sugar-draw.png" alt=""></div>
+      <div class="float-icon" style="--x:68.4%;--y:94.3%;animation-delay:-2.1s"><img src="games/capy.png" alt=""></div>
+      <div class="float-icon" style="--x:31.6%;--y:94.3%;animation-delay:-2.8s"><img src="games/comic-book-boy.png" alt=""></div>
+      <div class="float-icon" style="--x:5.7%;--y:68.4%;animation-delay:-3.5s"><img src="games/sheep-home.png" alt=""></div>
+      <div class="float-icon" style="--x:5.7%;--y:31.6%;animation-delay:-4.2s"><img src="games/rollventure-2.png" alt=""></div>
+      <div class="float-icon" style="--x:31.6%;--y:5.7%;animation-delay:-4.9s"><img src="games/capy.png" alt=""></div>
+    </div>
+  </div>
 </header>
 
 <main>
   <section id="games">
-    <h2 data-i18n="games_h">Our Games</h2>
-    <div class="grid">
-      <div class="game">
-        <img src="games/comic-book-boy.png" alt="Comic Book Boy">
-        <div>
-          <h3>Comic Book Boy</h3>
-          <p data-i18n="g_comic">Collect comics, become a hero</p>
-          <div class="links">
-            <a href="https://apps.apple.com/app/id6830351614">App Store</a>
+    <div class="wrap">
+      <h2 data-i18n="games_h">Our Games</h2>
+      <div class="grid">
+        <article class="game reveal">
+          <div class="g-head">
+            <img src="games/comic-book-boy.png" alt="Comic Book Boy">
+            <h3>Comic Book Boy</h3>
           </div>
-        </div>
-        <a class="qr" href="https://apps.apple.com/app/id6830351614" aria-label="App Store: Comic Book Boy"><img src="qr/comic-book-boy.png" alt="QR code – Comic Book Boy on the App Store"></a>
-      </div>
-      <div class="game">
-        <img src="games/capy.png" alt="Capybara Around the World">
-        <div>
-          <h3>Capybara Around the World</h3>
+          <p data-i18n="g_comic">Collect comics, become a hero</p>
+          <div class="game-foot">
+            <a class="go" href="https://apps.apple.com/app/id6830351614">App Store</a>
+            <a class="qr" href="https://apps.apple.com/app/id6830351614" aria-label="App Store: Comic Book Boy"><img src="qr/comic-book-boy.png" alt="QR code – Comic Book Boy on the App Store"></a>
+          </div>
+        </article>
+        <article class="game reveal">
+          <div class="g-head">
+            <img src="games/capy.png" alt="Capybara Around the World">
+            <h3>Capybara Around the World</h3>
+          </div>
           <p data-i18n="g_capy">Feed the capybara, pop the ice</p>
-          <div class="links"><a href="https://apps.apple.com/app/id6829455439">App Store</a></div>
-        </div>
-        <a class="qr" href="https://apps.apple.com/app/id6829455439" aria-label="App Store: Capybara Around the World"><img src="qr/capy.png" alt="QR code – Capybara Around the World on the App Store"></a>
-      </div>
-      <div class="game">
-        <img src="games/red-ball.png" alt="Red Ball">
-        <div>
-          <h3>Red Ball</h3>
+          <div class="game-foot">
+            <a class="go" href="https://apps.apple.com/app/id6829455439">App Store</a>
+            <a class="qr" href="https://apps.apple.com/app/id6829455439" aria-label="App Store: Capybara Around the World"><img src="qr/capy.png" alt="QR code – Capybara Around the World on the App Store"></a>
+          </div>
+        </article>
+        <article class="game reveal">
+          <div class="g-head">
+            <img src="games/red-ball.png" alt="Red Ball">
+            <h3>Red Ball</h3>
+          </div>
           <p data-i18n="g_red">Roll, jump and dodge the spikes</p>
-          <div class="links"><a href="https://apps.apple.com/vn/app/redball-2d/id6822674819">App Store</a></div>
-        </div>
-        <a class="qr" href="https://apps.apple.com/vn/app/redball-2d/id6822674819" aria-label="App Store: Red Ball"><img src="qr/red-ball.png" alt="QR code – Red Ball on the App Store"></a>
+          <div class="game-foot">
+            <a class="go" href="https://apps.apple.com/vn/app/redball-2d/id6822674819">App Store</a>
+            <a class="qr" href="https://apps.apple.com/vn/app/redball-2d/id6822674819" aria-label="App Store: Red Ball"><img src="qr/red-ball.png" alt="QR code – Red Ball on the App Store"></a>
+          </div>
+        </article>
+        <article class="game reveal">
+          <div class="g-head">
+            <img src="games/rollventure-2.png" alt="Rollventure 2">
+            <h3>Rollventure 2</h3>
+          </div>
+          <p data-i18n="g_rv2">The red ball is back: 25 physics puzzles</p>
+          <div class="game-foot">
+            <a class="go" href="https://apps.apple.com/app/id6835279388">App Store</a>
+            <a class="qr" href="https://apps.apple.com/app/id6835279388" aria-label="App Store: Rollventure 2"><img src="qr/rollventure-2.png" alt="QR code – Rollventure 2 on the App Store"></a>
+          </div>
+        </article>
+        <article class="game reveal">
+          <div class="g-head">
+            <img src="games/sugar-draw.png" alt="Sugar Draw">
+            <h3>Sugar Draw</h3>
+          </div>
+          <p data-i18n="g_sugar">Draw lines to pour sugar into the cups</p>
+          <div class="game-foot">
+            <a class="go" href="https://apps.apple.com/app/id6834115148">App Store</a>
+            <a class="qr" href="https://apps.apple.com/app/id6834115148" aria-label="App Store: Sugar Draw"><img src="qr/sugar-draw.png" alt="QR code – Sugar Draw on the App Store"></a>
+          </div>
+        </article>
+        <article class="game reveal">
+          <div class="g-head">
+            <img src="games/sheep-home.png" alt="The Sheep’s Journey Home">
+            <h3>The Sheep’s Journey Home</h3>
+          </div>
+          <p data-i18n="g_sheep">Guide three sheep back home</p>
+          <div class="game-foot">
+            <a class="go" href="https://apps.apple.com/app/id6833267348">App Store</a>
+            <a class="qr" href="https://apps.apple.com/app/id6833267348" aria-label="App Store: The Sheep’s Journey Home"><img src="qr/sheep-home.png" alt="QR code – The Sheep’s Journey Home on the App Store"></a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
   <section id="about">
-    <h2 data-i18n="about_h">About</h2>
-    <p data-i18n-html="about_p1"><strong>2D Game Hub</strong> is the home of a growing collection of small, hand-made 2D games for iPhone and iPad: platformers, puzzles, physics toys and more.</p>
-    <h3 data-i18n="about_h3">What you get</h3>
-    <ul>
-      <li data-i18n="about_li1">Quick, easy-to-learn games you can play in short sessions</li>
-      <li data-i18n="about_li2">Colorful pixel and hand-drawn art</li>
-      <li data-i18n="about_li3">No account needed; the games work offline</li>
-      <li data-i18n="about_li4">Free to play, with optional one-time upgrades in some games</li>
-    </ul>
-    <p data-i18n="about_p2">New games are added over time. Check back soon!</p>
+    <div class="wrap">
+      <div class="panel reveal">
+        <h2 data-i18n="about_h">About</h2>
+        <p data-i18n-html="about_p1"><strong>2D Game Hub</strong> is the home of a growing collection of small, hand-made 2D games for iPhone and iPad: platformers, puzzles, physics toys and more.</p>
+        <h3 data-i18n="about_h3">What you get</h3>
+        <ul>
+          <li data-i18n="about_li1">Quick, easy-to-learn games you can play in short sessions</li>
+          <li data-i18n="about_li2">Colorful pixel and hand-drawn art</li>
+          <li data-i18n="about_li3">No account needed; the games work offline</li>
+          <li data-i18n="about_li4">Free to play, with optional one-time upgrades in some games</li>
+        </ul>
+        <p data-i18n="about_p2">New games are added over time. Check back soon!</p>
+      </div>
+    </div>
   </section>
 
   <section id="support">
-    <h2 data-i18n="support_h">Support</h2>
-    <p data-i18n-html="support_p">Need help with a game? Email <a href="mailto:vudinhhuyit@gmail.com?subject=2D%20Game%20Hub%20Support">vudinhhuyit@gmail.com</a> and include:</p>
-    <ul>
-      <li data-i18n="support_li1">The name of the game and its version</li>
-      <li data-i18n="support_li2">Your device model and iOS / iPadOS version</li>
-      <li data-i18n="support_li3">A short description of the problem (a screenshot helps)</li>
-    </ul>
-    <h3 data-i18n="sup_h1">How is my progress saved?</h3>
-    <p data-i18n="sup_p1">Progress is stored only on your device. Deleting a game also deletes its unlocked levels and best scores.</p>
-    <h3 data-i18n="sup_h2">How do I turn off sound?</h3>
-    <p data-i18n="sup_p2">Open the settings or pause menu inside the game and switch sound off.</p>
-    <h3 data-i18n="sup_h3">I bought an upgrade but it's missing</h3>
-    <p data-i18n="sup_p3">Use the "Restore Purchases" button in the game. Purchases are handled by Apple and tied to your Apple ID.</p>
+    <div class="wrap">
+      <div class="panel reveal">
+        <h2 data-i18n="support_h">Support</h2>
+        <p data-i18n-html="support_p">Need help with a game? Email <a href="mailto:vudinhhuyit@gmail.com?subject=2D%20Game%20Hub%20Support">vudinhhuyit@gmail.com</a> and include:</p>
+        <ul>
+          <li data-i18n="support_li1">The name of the game and its version</li>
+          <li data-i18n="support_li2">Your device model and iOS / iPadOS version</li>
+          <li data-i18n="support_li3">A short description of the problem (a screenshot helps)</li>
+        </ul>
+        <h3 data-i18n="sup_h1">How is my progress saved?</h3>
+        <p data-i18n="sup_p1">Progress is stored only on your device. Deleting a game also deletes its unlocked levels and best scores.</p>
+        <h3 data-i18n="sup_h2">How do I turn off sound?</h3>
+        <p data-i18n="sup_p2">Open the settings or pause menu inside the game and switch sound off.</p>
+        <h3 data-i18n="sup_h3">I bought an upgrade but it's missing</h3>
+        <p data-i18n="sup_p3">Use the "Restore Purchases" button in the game. Purchases are handled by Apple and tied to your Apple ID.</p>
+      </div>
+    </div>
   </section>
 
   <section id="privacy">
-    <h2 data-i18n="priv_h">Privacy Policy</h2>
-    <p class="muted" data-i18n="priv_updated">Last updated: November 12, 2026</p>
-    <h3 data-i18n="priv_web_h">This website</h3>
-    <p data-i18n="priv_web_p">This page does not use cookies, trackers or analytics, and does not collect personal data. Your language choice is saved only in your browser.</p>
-    <h3 data-i18n="priv_app_h">Our apps</h3>
-    <p data-i18n="priv_app_p">The games have no accounts and do not ask for your name, email or other personal details. We do not collect your game progress: it stays on your device. Depending on the game, these third-party services are used:</p>
-    <ul>
-      <li data-i18n-html="priv_li1"><strong>Google AdMob</strong> shows the ads. It may collect device identifiers (such as the advertising identifier, if you allow tracking), IP address, approximate location and ad interaction data to serve and measure ads and prevent fraud.</li>
-      <li data-i18n-html="priv_li2"><strong>Firebase Analytics</strong> records anonymous usage events (for example a level started or finished) and device and app information to help us improve the games.</li>
-      <li data-i18n-html="priv_li3"><strong>Firebase Crashlytics</strong> records crash reports with technical details such as device model, iOS version and the state of the app at the time of the crash, only to fix bugs.</li>
-      <li data-i18n-html="priv_li4"><strong>Apple In-App Purchase</strong> – purchases are processed by Apple. We never see your payment details.</li>
-    </ul>
-    <p data-i18n="priv_app_p2">Not every game uses every service above.</p>
-    <h3 data-i18n="priv_ads_h">Advertising and your choices</h3>
-    <p data-i18n="priv_ads_p1">On first launch a game may ask, through the system “Allow tracking” dialog, whether ads may be personalized. If you decline, you still see ads, but they are not personalized. You can change this at any time in iOS Settings → Privacy &amp; Security → Tracking.</p>
-    <p data-i18n="priv_ads_p2">Where required by law (for example in the European Economic Area and the United Kingdom), a consent form from Google lets you choose how ad data is used before ads are requested.</p>
-    <p data-i18n-html="priv_ads_p3">You can remove ads in games that offer a one-time Pro or Premium purchase. Learn more in <a href="https://policies.google.com/technologies/partner-sites">Google’s policy on how it uses data from apps that use its services</a>.</p>
-    <h3 data-i18n="priv_dev_h">Data stored on your device</h3>
-    <p data-i18n="priv_dev_p">Progress, unlocked levels, best scores and stars, replay counts, purchases, and sound and language settings are stored on your device. This data stays on your device and is removed when you delete the app or use a game’s “Clear progress” option, where available.</p>
-    <h3 data-i18n="priv_kid_h">Children's privacy</h3>
-    <p data-i18n="priv_kid_p">The games are for a general audience and are not directed to children under 13. We do not knowingly collect personal information from children. Ads are served by Google AdMob and limited by the settings above. Parents can remove all ads with a one-time purchase where a game offers one. If you believe a child has given us personal information, email us and we will delete it.</p>
-    <h3 data-i18n="priv_chg_h">Changes to this policy</h3>
-    <p data-i18n="priv_chg_p">Changes are posted on this page with an updated date.</p>
-    <h3 data-i18n="priv_contact_h">Contact</h3>
-    <p><a href="mailto:vudinhhuyit@gmail.com?subject=2D%20Game%20Hub%20Privacy">vudinhhuyit@gmail.com</a></p>
+    <div class="wrap">
+      <div class="panel reveal">
+        <h2 data-i18n="priv_h">Privacy Policy</h2>
+        <p class="muted" data-i18n="priv_updated">Last updated: November 12, 2026</p>
+        <h3 data-i18n="priv_web_h">This website</h3>
+        <p data-i18n="priv_web_p">This page does not use cookies, trackers or analytics, and does not collect personal data. Your language choice is saved only in your browser.</p>
+        <h3 data-i18n="priv_app_h">Our apps</h3>
+        <p data-i18n="priv_app_p">The games have no accounts and do not ask for your name, email or other personal details. We do not collect your game progress: it stays on your device. Depending on the game, these third-party services are used:</p>
+        <ul>
+          <li data-i18n-html="priv_li1"><strong>Google AdMob</strong> shows the ads. It may collect device identifiers (such as the advertising identifier, if you allow tracking), IP address, approximate location and ad interaction data to serve and measure ads and prevent fraud.</li>
+          <li data-i18n-html="priv_li2"><strong>Firebase Analytics</strong> records anonymous usage events (for example a level started or finished) and device and app information to help us improve the games.</li>
+          <li data-i18n-html="priv_li3"><strong>Firebase Crashlytics</strong> records crash reports with technical details such as device model, iOS version and the state of the app at the time of the crash, only to fix bugs.</li>
+          <li data-i18n-html="priv_li4"><strong>Apple In-App Purchase</strong> – purchases are processed by Apple. We never see your payment details.</li>
+        </ul>
+        <p data-i18n="priv_app_p2">Not every game uses every service above.</p>
+        <h3 data-i18n="priv_ads_h">Advertising and your choices</h3>
+        <p data-i18n="priv_ads_p1">On first launch a game may ask, through the system “Allow tracking” dialog, whether ads may be personalized. If you decline, you still see ads, but they are not personalized. You can change this at any time in iOS Settings → Privacy &amp; Security → Tracking.</p>
+        <p data-i18n="priv_ads_p2">Where required by law (for example in the European Economic Area and the United Kingdom), a consent form from Google lets you choose how ad data is used before ads are requested.</p>
+        <p data-i18n-html="priv_ads_p3">You can remove ads in games that offer a one-time Pro or Premium purchase. Learn more in <a href="https://policies.google.com/technologies/partner-sites">Google’s policy on how it uses data from apps that use its services</a>.</p>
+        <h3 data-i18n="priv_dev_h">Data stored on your device</h3>
+        <p data-i18n="priv_dev_p">Progress, unlocked levels, best scores and stars, replay counts, purchases, and sound and language settings are stored on your device. This data stays on your device and is removed when you delete the app or use a game’s “Clear progress” option, where available.</p>
+        <h3 data-i18n="priv_kid_h">Children's privacy</h3>
+        <p data-i18n="priv_kid_p">The games are for a general audience and are not directed to children under 13. We do not knowingly collect personal information from children. Ads are served by Google AdMob and limited by the settings above. Parents can remove all ads with a one-time purchase where a game offers one. If you believe a child has given us personal information, email us and we will delete it.</p>
+        <h3 data-i18n="priv_chg_h">Changes to this policy</h3>
+        <p data-i18n="priv_chg_p">Changes are posted on this page with an updated date.</p>
+        <h3 data-i18n="priv_contact_h">Contact</h3>
+        <p><a href="mailto:vudinhhuyit@gmail.com?subject=2D%20Game%20Hub%20Privacy">vudinhhuyit@gmail.com</a></p>
+      </div>
+    </div>
   </section>
 </main>
 
 <footer>© 2026 2D Game Hub</footer>
 
+<script>
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Reveal on scroll
+  const items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.05 });
+    items.forEach((el) => io.observe(el));
+  } else {
+    items.forEach((el) => el.classList.add('in'));
+  }
+</script>
 <script src="i18n.js"></script>
 </body>
 </html>

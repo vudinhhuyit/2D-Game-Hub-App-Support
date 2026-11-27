@@ -5,6 +5,8 @@
     vi: {
       title: "2D Game Hub – Trò chơi, Hỗ trợ & Quyền riêng tư",
       tagline: "Game 2D nhỏ, vui to",
+      get_app: "Tải trên App Store",
+      scan_qr: "Quét bằng camera iPhone để tải về",
       nav_games: "Trò chơi",
       nav_about: "Giới thiệu",
       nav_support: "Hỗ trợ",
@@ -61,6 +63,8 @@
     zh: {
       title: "2D Game Hub – 游戏、支持与隐私",
       tagline: "小小2D游戏，大大乐趣",
+      get_app: "在 App Store 下载",
+      scan_qr: "用 iPhone 相机扫码下载",
       nav_games: "游戏",
       nav_about: "介绍",
       nav_support: "支持",
@@ -117,6 +121,8 @@
     ja: {
       title: "2D Game Hub – ゲーム、サポート、プライバシー",
       tagline: "小さな2Dゲームで、大きな楽しみ",
+      get_app: "App Store でダウンロード",
+      scan_qr: "iPhone のカメラでスキャンしてダウンロード",
       nav_games: "ゲーム",
       nav_about: "紹介",
       nav_support: "サポート",
@@ -173,6 +179,8 @@
     ko: {
       title: "2D Game Hub – 게임, 지원 및 개인정보",
       tagline: "작은 2D 게임, 큰 즐거움",
+      get_app: "App Store에서 다운로드",
+      scan_qr: "iPhone 카메라로 스캔하여 다운로드",
       nav_games: "게임",
       nav_about: "소개",
       nav_support: "지원",
@@ -229,6 +237,8 @@
     es: {
       title: "2D Game Hub – Juegos, soporte y privacidad",
       tagline: "Pequeños juegos 2D, gran diversión",
+      get_app: "Descargar en el App Store",
+      scan_qr: "Escanea con la cámara del iPhone para descargar",
       nav_games: "Juegos",
       nav_about: "Acerca de",
       nav_support: "Soporte",
@@ -285,6 +295,8 @@
     pt: {
       title: "2D Game Hub – Jogos, suporte e privacidade",
       tagline: "Pequenos jogos 2D, muita diversão",
+      get_app: "Baixar na App Store",
+      scan_qr: "Escaneie com a câmera do iPhone para baixar",
       nav_games: "Jogos",
       nav_about: "Sobre",
       nav_support: "Suporte",
@@ -341,6 +353,8 @@
     ru: {
       title: "2D Game Hub – Игры, поддержка и конфиденциальность",
       tagline: "Маленькие 2D-игры, большое веселье",
+      get_app: "Загрузить в App Store",
+      scan_qr: "Отсканируйте камерой iPhone, чтобы скачать",
       nav_games: "Игры",
       nav_about: "Об играх",
       nav_support: "Поддержка",
